@@ -77,8 +77,17 @@ class ViewController: UIViewController {
         guard textField.text?.isEmpty == false else { return }
         if let _ = Double(textField.text!) {
             let alert = UIAlertController(title: "Wrong format", message: "Please enter your name!", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addTextField { (textField : UITextField!) -> Void in
+                textField.placeholder = "Enter correct Name!"
+            }
+            let okAction = UIAlertAction(title: "Set", style: .default, handler: { _ in
+                guard let textFields = alert.textFields else { return }
+                guard let name = textFields[0].text else { return }
+                self.label.text = name
+            })
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alert.addAction(okAction)
+            alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
             print("Error")
         } else {
