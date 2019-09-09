@@ -34,6 +34,7 @@ class ViewController: UIViewController {
         }
     }
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     
     @IBOutlet var allObjects: [AnyObject]!
@@ -94,6 +95,12 @@ class ViewController: UIViewController {
             label.text = textField.text
             textField.text = nil
         }
+    }
+    @IBAction func chengeData(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        dateFormatter.locale = Locale.init(identifier: "ru_Ru")
+        label.text = dateFormatter.string(from: sender.date)
     }
     
     
