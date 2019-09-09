@@ -34,18 +34,26 @@ class ViewController: UIViewController {
         }
     }
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var datePicker: UIDatePicker!
-    
-    
-    @IBOutlet var allObjects: [AnyObject]!
-    
+    @IBOutlet weak var datePicker: UIDatePicker! {
+        didSet {
+            datePicker.locale = Locale(identifier: "ru_Ru")
+        }
+    }
+    @IBOutlet weak var switchLabel: UILabel!
+    @IBOutlet var allObjects: [UIView]!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         label.text = String(slider.value)
+
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     @IBAction func segmentChosen(_ sender: UISegmentedControl) {
         guard let segmentText = segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex) else { return }
         label.text = "The \(segmentText) segment is selected"
@@ -61,10 +69,6 @@ class ViewController: UIViewController {
         default:
             print("Something is wrong!")
         }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
     }
     
     @IBAction func sliderAction(_ sender: UISlider) {
@@ -103,6 +107,22 @@ class ViewController: UIViewController {
         label.text = dateFormatter.string(from: sender.date)
     }
     
+    @IBAction func switchAction(_ sender: UISwitch) {
+        for element in allObjects {
+            element.isHidden = sender.isOn
+        }
+        if sender.isOn {
+            switchLabel.text = "Отобразить все элементы"
+        } else {
+            switchLabel.text = "Скрыть все элементы"
+        }
+    }
+    
     
 }
 
+extension UIScrollView {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
+    }
+}
