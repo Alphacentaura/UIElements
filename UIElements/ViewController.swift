@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var selectedElement : UIView?
+    
     @IBOutlet weak var segmentedControl: UISegmentedControl! {
         didSet {
             segmentedControl.insertSegment(withTitle: "Third", at: 2, animated: true)
@@ -42,15 +44,43 @@ class ViewController: UIViewController {
     @IBOutlet weak var switchLabel: UILabel!
     @IBOutlet var allObjects: [UIView]!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var textFieldForPicker: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         label.text = String(slider.value)
 
+        choiceUIElement()
+        createToolbar()
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func choiceUIElement() {
+        let elementPicker = UIPickerView()
+        elementPicker.delegate = self
+        textFieldForPicker.inputView = elementPicker
+        // Customization
+        
+        elementPicker.backgroundColor = .brown
+        
+    }
+    
+    func createToolbar() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeyboard))
+        toolbar.setItems([doneButton], animated: true)
+        toolbar.isUserInteractionEnabled = true
+        
+        textFieldForPicker.inputAccessoryView = toolbar
+        
+        // Customization
+        toolbar.tintColor = .white
+        toolbar.barTintColor = .brown
+    }
+    
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -119,6 +149,43 @@ class ViewController: UIViewController {
     }
     
     
+}
+
+extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return allObjects.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(describing: type(of: allObjects[row]))
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        textFieldForPicker.text = String(describing: type(of: allObjects[row]))
+        
+        for element in allObjects {
+            element.isHidden = element == allObjects[row] ? false : true
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerViewLabel = UILabel()
+        
+        if let currentLabel = view as? UILabel {
+            pickerViewLabel = currentLabel
+        } else {
+            pickerViewLabel = UILabel()
+        }
+        pickerViewLabel.textColor = .white
+        pickerViewLabel.textAlignment = .center
+        pickerViewLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 23)
+        pickerViewLabel.text = String(describing: type(of: allObjects[row]))
+        return pickerViewLabel
+    }
 }
 
 extension UIScrollView {

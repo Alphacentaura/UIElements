@@ -100,8 +100,18 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UAe-cb-5M7">
+                                        <rect key="frame" x="97.5" y="605" width="180" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="f1a-bY-sf0"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="UAe-cb-5M7" firstAttribute="centerX" secondItem="MUj-L7-lda" secondAttribute="centerX" id="1sn-6F-t0p"/>
                                     <constraint firstItem="Rd9-vl-xaa" firstAttribute="centerX" secondItem="d95-fE-Ly0" secondAttribute="centerX" id="8BC-gi-Mxv"/>
                                     <constraint firstAttribute="trailing" secondItem="6mL-6y-L8u" secondAttribute="trailing" constant="8" id="8ab-bP-07L"/>
                                     <constraint firstItem="DaI-Ow-JPL" firstAttribute="top" secondItem="OpO-Sl-aKT" secondAttribute="bottom" constant="25" id="BjY-uz-SMs"/>
@@ -113,6 +123,7 @@
                                     <constraint firstItem="LTS-GI-tpe" firstAttribute="top" secondItem="6mL-6y-L8u" secondAttribute="bottom" constant="30" id="NHn-uu-A22"/>
                                     <constraint firstItem="LTS-GI-tpe" firstAttribute="leading" secondItem="avE-Bk-nCH" secondAttribute="trailing" constant="8" id="PKI-1V-Ryu"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DaI-Ow-JPL" secondAttribute="trailing" constant="16" id="TAf-wZ-mUV"/>
+                                    <constraint firstItem="UAe-cb-5M7" firstAttribute="top" secondItem="avE-Bk-nCH" secondAttribute="bottom" constant="19" id="Ugu-5J-z6c"/>
                                     <constraint firstItem="6mL-6y-L8u" firstAttribute="top" secondItem="d95-fE-Ly0" secondAttribute="bottom" constant="30" id="Uxv-lg-opr"/>
                                     <constraint firstItem="DaI-Ow-JPL" firstAttribute="centerX" secondItem="A4u-wm-2n8" secondAttribute="centerX" id="aKd-bQ-eqF"/>
                                     <constraint firstItem="d95-fE-Ly0" firstAttribute="top" secondItem="Rd9-vl-xaa" secondAttribute="bottom" constant="35" id="ayp-LC-biV"/>
@@ -145,6 +156,7 @@
                         <outlet property="slider" destination="A4u-wm-2n8" id="Ogc-Qa-Sgu"/>
                         <outlet property="switchLabel" destination="avE-Bk-nCH" id="FBT-z7-hyD"/>
                         <outlet property="textField" destination="Rd9-vl-xaa" id="1DJ-Nu-Hef"/>
+                        <outlet property="textFieldForPicker" destination="UAe-cb-5M7" id="gg7-lw-hm8"/>
                         <outletCollection property="allObjects" destination="OpO-Sl-aKT" collectionClass="NSMutableArray" id="hbc-iw-NlJ"/>
                         <outletCollection property="allObjects" destination="A4u-wm-2n8" collectionClass="NSMutableArray" id="4rp-QG-rEN"/>
                         <outletCollection property="allObjects" destination="DaI-Ow-JPL" collectionClass="NSMutableArray" id="3ny-bS-bCX"/>
