@@ -33,6 +33,7 @@ class ViewController: UIViewController {
             slider.value = 1
         }
     }
+    @IBOutlet weak var textField: UITextField!
     
     
     @IBOutlet var allObjects: [AnyObject]!
@@ -61,12 +62,31 @@ class ViewController: UIViewController {
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @IBAction func sliderAction(_ sender: UISlider) {
          label.text = String(sender.value)
         
         let bgColor = self.view.backgroundColor
         self.view.backgroundColor = bgColor?.withAlphaComponent(CGFloat(sender.value))
     }
+    
+    @IBAction func donePressed(_ sender: UIButton) {
+        guard textField.text?.isEmpty == false else { return }
+        if let _ = Double(textField.text!) {
+            let alert = UIAlertController(title: "Wrong format", message: "Please enter your name!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            print("Error")
+        } else {
+            label.text = textField.text
+            textField.text = nil
+        }
+    }
+    
     
 }
 
